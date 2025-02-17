@@ -1,0 +1,74 @@
+.deatilsdiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #F0F2F5;
+    width: 100%;
+    height: 60px;
+    /* background-color: yellow; */
+    padding: 0 20px;
+}
+
+.deatilsdiv img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.reciverdetails {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.funct {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+}
+
+.funct button {
+    border-radius: 0;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    min-width: 30px;
+    height: 100%;
+    background: none;
+}
+
+.funct button:hover {
+    background: none;
+}
+/* Chat Container */
+.chatdetails {
+    /* flex-grow: 1; Takes up all available space */
+    width: 100%;
+    min-height: 500px; 
+    background-image: url('https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg');
+    background-size: cover; /* Ensures the image covers the full div */
+    background-position: center;
+    background-repeat: no-repeat;
+    /* display: flex; /* Allows child elements to position properly */
+    /* align-items: center;
+    justify-content: center; */
+}
+.inputsection{
+    display: flex;
+    background-color:#F0F2F5;
+    height: 57px;
+}
+.inputsection svg{
+    cursor: pointer;
+    margin: 10px;
+}
+.inputdiv{
+    margin: 10px;
+    margin-left: 0;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    background-color: white;
+}
