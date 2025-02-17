@@ -1,19 +1,13 @@
-import React from 'react'
+import React from 'react';
 import styles from './style.module.css';
-import defimg from '../../assets/default.png';
-// import Defchatbox from '../Defchatbox';
-// import Chatcontainer from '../Chatcontainer';
-import Defchatbox from '../../component/Defchatbox';
 import Chatcontainer from '../../component/Chatcontainer';
 
-
-function Chatbox() {
+function Chatbox({ selectedChat }) {
   return (
-    <div className={ styles.chatboxmaindiv }>
-      {/* <Defchatbox/> */}
-      <Chatcontainer/>
+    <div className={styles.chatboxmaindiv}>
+      <Chatcontainer selectedChat={selectedChat} />
     </div>
-  )
+  );
 }
 
-export default Chatbox
+export default Chatbox;

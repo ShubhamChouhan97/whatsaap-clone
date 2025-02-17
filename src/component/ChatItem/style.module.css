@@ -6,6 +6,11 @@
     height: 60px;
     width: 100%;
     cursor: pointer;
+/* border: 1px solid black; */
+}
+.chatmain img{
+    width: 30px;
+    height: 30px;
 }
 .nametime{
     width: 360px;

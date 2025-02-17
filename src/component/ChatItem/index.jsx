@@ -3,7 +3,8 @@ import styles from './style.module.css';
 
 const ChatItem = ({ chat, onSelectChat }) => {
   return (
-    <div className={styles.chatmain} onClick={() => onSelectChat && onSelectChat(chat)}>
+    <div className={styles.chatmain} onClick={() => onSelectChat(chat)}>
+     
       <img 
         src={chat.image || "https://via.placeholder.com/50"} 
         alt={chat.name} 
@@ -14,10 +15,32 @@ const ChatItem = ({ chat, onSelectChat }) => {
           <p className={styles.chatname}>{chat.name}</p>
           <p>{chat.chattime}</p>
         </div>
-        <p className="text-gray-500 text-sm truncate w-full">{chat.lastMessage}</p>
+        <p >{chat.lastMessage}</p>
       </div>
     </div>
   );
 };
 
 export default ChatItem;
+
+// import React from "react";
+// import styles from './style.module.css';
+
+// const ChatItem = ({ chat, onSelectChat }) => {
+//   return (
+//     <div className={styles.chatmain} onClick={() => onSelectChat(chat)}>
+//       <img 
+//         src={chat.image || "https://via.placeholder.com/50"} 
+//         alt={chat.name} 
+//         className="w-12 h-12 rounded-full mr-4"
+//       />
+//       <div className="flex-1">
+//         <p className={styles.chatname}>{chat.name}</p>
+//         <p>{chat.lastMessage}</p>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ChatItem;
+

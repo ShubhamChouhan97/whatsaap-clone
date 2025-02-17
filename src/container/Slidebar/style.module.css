@@ -24,6 +24,9 @@ h2{
 .fun{
     margin-right: 20px;
 }
+Input{
+    margin-left: 10px;
+}
 .inputbox {
     width: 100%; /* Take full width of parent */
    height: 20%;/* Subtract padding (5px top + 5px bottom) */
