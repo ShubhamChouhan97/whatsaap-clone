@@ -14,7 +14,7 @@ const dummyChats = [
     id: 1,
     name: "Alice Johnson",
     lastMessage: "See you tomorrow!",
-    chattime: "9:15 AM",
+    chattime: "9:05 AM",
     image: "https://i.pinimg.com/736x/69/a5/60/69a5602fb6377d1fef9bb45e8db9e415.jpg",
     messages: [
       { sender: "Alice", text: "Hey, how are you?", time: "9:00 AM" },
@@ -46,7 +46,8 @@ const dummyChats = [
       { sender: "Alice", text: "See you tomorrow!", time: "9:15 AM" },
       { sender: "Alice", text: "Hey, how are you?", time: "9:00 AM" },
       { sender: "You", text: "I'm good! What about you?", time: "9:05 AM" },
-      { sender: "Alice", text: "See you tomorrow!", time: "9:15 AM" }
+      { sender: "Alice", text: "See you tomorrow!", time: "9:15 AM" },
+      { sender: "You", text: "I'm good! What about you?", time: "9:05 AM" }
     ]
   },
   {

@@ -2,14 +2,14 @@ import React from 'react';
 import styles from './style.module.css';
 import Li from '../../component/Li'; // Ensure the correct folder name
 
-function Tolbar() {
+function Tolbar({ onStatusClick, onChatClick }) {
   return (
     <div className={styles.tolbar}>
       <header>
         <div className={styles.upsection}>
           <ul>
-            <Li image="msg" >Message</Li>
-            <Li image="status" >Status</Li>
+            <Li image="msg" onClick={onChatClick} >Message</Li>
+            <Li image="status"  onClick={onStatusClick}>Status</Li>
             <Li image="channel" > Channel</Li>
             <Li image="group" >Group</Li>
             <Li image="ai" >Meta AI</Li>

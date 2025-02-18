@@ -65,9 +65,24 @@ import Tolbar from './container/Tolbar';
 import Slidebar from './container/Slidebar';
 import Chatbox from './container/Chatbox';
 import Defchatbox from './component/Defchatbox';
+import Status from './container/Status'; 
+
 
 function App() {
+
+  const [showSidebar, setShowSidebar] = useState(true);
+  const [showStatus, setShowStatus] = useState(false);
   const [selectedChat, setSelectedChat] = useState(null);
+
+  const handleStatusClick = () => {
+    setShowSidebar(false);
+    setShowStatus(true);
+  };
+
+  const handleChatClick = () => {
+    setShowSidebar(true);
+    setShowStatus(false);
+  };
 
   const handleChatSelection = (chat) => {
     setSelectedChat(chat);  // Update selected chat
@@ -76,8 +91,12 @@ function App() {
   return (
     <div className='app'>
       <div className='app_body'>
-        <Tolbar />
-        <Slidebar onChatSelect={handleChatSelection} /> {/* Pass handler */}
+        {/* <Tolbar />
+        <Status/> */}
+       <Tolbar onStatusClick={handleStatusClick} onChatClick={handleChatClick} />
+        {showSidebar && <Slidebar onChatSelect={handleChatSelection} />}
+        {showStatus && <Status />}
+        {/* <Slidebar onChatSelect={handleChatSelection} />  */}
         
         {selectedChat ? (
           <Chatbox selectedChat={selectedChat} /> // Pass selected chat

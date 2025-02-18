@@ -21,14 +21,14 @@ const images = {
   profile: profileimg,
 };
 
-function Li({ image, children }) {
-  const handleClick = () => {
-    alert(`Button ${image} clicked!`);
-  };
+function Li({ image, children, onClick}) {
+  // const handleClick = () => {
+  //   alert(`Button ${image} clicked!`);
+  // };
 
   return (
-    <li className={styles.listItem}>
-      <Imgbutton onClick={handleClick} image={images[image]} />
+    <li className={styles.listItem} onClick={onClick}>
+      <Imgbutton onClick={onClick} image={images[image]} />
       <span className={styles.tooltip}>{children}</span>
     </li>
   );

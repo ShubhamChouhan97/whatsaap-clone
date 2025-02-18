@@ -1,8 +1,11 @@
-
+.Defchatboxdiv{
+    /* background-color: red; */
+    width: 55%;
+}
 .lapimg{
     margin-top:20% ;
     width: 100%;
-    /* background-color: red; */
+    /* background-color: yellow; */
     display: flex;
     justify-content: center;
 }
@@ -13,12 +16,12 @@
     /* background-color: blue; */
 }
 .deatills h1{
-    margin-left: 13%;
+    margin-left: 21%;
     color: #56656F;
 }
 .deatills p{
     margin-top: 1%;
-    margin-left: 13%;
+    margin-left: 21%;
     color: #54656F;
 }
 .p2{
@@ -30,7 +33,7 @@
     width: 50%;
 }
 .buttondiv{
-    margin-left: 280px;
+    margin-left: 320px;
     margin-top: 20px;
 }
 .buttondiv button{
@@ -44,8 +47,8 @@
     color: white;
 }
 .last{
-    margin-top: 10%;
-    margin-left: 22%;
+    margin-top: 8%;
+    margin-left: 25%;
     color: #54656F;
     /* background-color: red; */
     display: inline-flex;
