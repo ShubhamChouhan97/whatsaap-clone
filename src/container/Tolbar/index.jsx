@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './style.module.css';
 import Li from '../../component/Li'; // Ensure the correct folder name
 
-function Tolbar({ onStatusClick, onChatClick ,onchannelclick,oncommunityclick}) {
+function Tolbar({ onStatusClick, onChatClick ,onchannelclick,oncommunityclick,onmetaclick}) {
   return (
     <div className={styles.tolbar}>
       <header>
@@ -12,7 +12,7 @@ function Tolbar({ onStatusClick, onChatClick ,onchannelclick,oncommunityclick}) 
             <Li image="status"  onClick={onStatusClick}>Status</Li>
             <Li image="channel" onClick={onchannelclick} > Channel</Li>
             <Li image="group" onClick={oncommunityclick}>Group</Li>
-            <Li image="ai" >Meta AI</Li>
+            <Li image="ai" onClick={onmetaclick}>Meta AI</Li>
           </ul>
         </div>
         <div className={styles.downsection}>

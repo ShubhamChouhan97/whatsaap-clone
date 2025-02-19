@@ -10,13 +10,16 @@ import Channels from './container/Channels';
 import Community from './container/Community';
 
 function App() {
-
+  const metaurl = "https://www.meta.ai/"
   const [showChannel,setChannel] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
   const [showStatus, setShowStatus] = useState(false);
   const [selectedChat, setSelectedChat] = useState(null);
   const [showCommunity, SetCommunity] = useState(false);
 
+  const handlemetaai = () => {
+    window.open(metaurl, "", "");
+  };
 
 const handlecommunityClick =()=>{
   SetCommunity(true);
@@ -60,7 +63,7 @@ const handlecommunityClick =()=>{
         
 
 {/* real check */}
-        <Tolbar onStatusClick={handleStatusClick} onChatClick={handleChatClick} onchannelclick={handlchannelClick} oncommunityclick={handlecommunityClick}/>
+        <Tolbar onStatusClick={handleStatusClick} onChatClick={handleChatClick} onchannelclick={handlchannelClick} oncommunityclick={handlecommunityClick} onmetaclick={handlemetaai}/>
         {showSidebar && <Slidebar onChatSelect={handleChatSelection} />}
         {showStatus && <Status />}
         {showChannel&& <Channels/>}
