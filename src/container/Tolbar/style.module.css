@@ -19,8 +19,6 @@ header{
     display: flex;
     justify-content: center;
     /* background-color: aqua; */
-
-    /* float: inline-end; */
 }
 ul{
     list-style-type: none;

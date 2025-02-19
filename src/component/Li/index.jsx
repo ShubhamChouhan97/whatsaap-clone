@@ -22,10 +22,6 @@ const images = {
 };
 
 function Li({ image, children, onClick}) {
-  // const handleClick = () => {
-  //   alert(`Button ${image} clicked!`);
-  // };
-
   return (
     <li className={styles.listItem} onClick={onClick}>
       <Imgbutton onClick={onClick} image={images[image]} />
