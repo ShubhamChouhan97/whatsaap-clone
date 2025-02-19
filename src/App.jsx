@@ -7,12 +7,14 @@ import Defchatbox from './component/Defchatbox';
 import Status from './container/Status'; 
 import Channels from './container/Channels';
 import Settingcon from './container/Settingcon';
-
+import Profile from './container/Profile';
 
 import Community from './container/Community';
 
 function App() {
-  const metaurl = "https://www.meta.ai/"
+  const metaurl = "https://www.meta.ai/";
+
+  const [showProfile,setProile] = useState(false);
   const [showChannel,setChannel] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
   const [showStatus, setShowStatus] = useState(false);
@@ -25,8 +27,18 @@ function App() {
     window.open(metaurl, "", "");
   };
 
+  const handelProfile =()=>{
+    setProile(true);
+    setSetting(false);
+  setShowSidebar(false);
+  setShowStatus(false);
+  setChannel(false);
+  SetCommunity(false);
+  setSelectedChat(null);
+  }
 
 const handelsettingClick = ()=>{
+  setProile(false);
   setSetting(true);
   setShowSidebar(false);
   setShowStatus(false);
@@ -35,6 +47,7 @@ const handelsettingClick = ()=>{
   setSelectedChat(null);
 }
 const handlecommunityClick =()=>{
+  setProile(false);
   setSetting(false);
   SetCommunity(true);
   setChannel(false);
@@ -44,6 +57,7 @@ const handlecommunityClick =()=>{
 }
 
   const handlchannelClick = () => {
+    setProile(false);
     setSetting(false);
     setChannel(true);
     SetCommunity(false);
@@ -52,6 +66,7 @@ const handlecommunityClick =()=>{
     setSelectedChat(null);
   };
   const handleStatusClick = () => {
+    setProile(false);
     setSetting(false);
     SetCommunity(false);
     setChannel(false);
@@ -61,6 +76,7 @@ const handlecommunityClick =()=>{
   };
 
   const handleChatClick = () => {
+    setProile(false);
     setSetting(false);
     setChannel(false);
     SetCommunity(false);
@@ -77,16 +93,17 @@ const handlecommunityClick =()=>{
     <div className='app'>
       <div className='app_body'>
          {/* <Tolbar />
-       <Settingcon/> */}
+       <Profile/> */}
     
 
 {/* real check */}
-        <Tolbar onStatusClick={handleStatusClick} onChatClick={handleChatClick} onchannelclick={handlchannelClick} oncommunityclick={handlecommunityClick} onmetaclick={handlemetaai} onsettingclick={handelsettingClick} />
+        <Tolbar onStatusClick={handleStatusClick} onChatClick={handleChatClick} onchannelclick={handlchannelClick} oncommunityclick={handlecommunityClick} onmetaclick={handlemetaai} onsettingclick={handelsettingClick}  onProfileClick={handelProfile} />
         {showSidebar && <Slidebar onChatSelect={handleChatSelection} />}
         {showStatus && <Status />}
         {showChannel&& <Channels/>}
         {showCommunity && <Community />}
         {showSetting&& <Settingcon/>}
+        { showProfile &&<Profile/>}
         {selectedChat ? (
           <Chatbox selectedChat={selectedChat} /> // Pass selected chat
         ) : (
