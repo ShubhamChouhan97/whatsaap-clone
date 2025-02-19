@@ -1,64 +1,3 @@
-// // import React from 'react'
-// // import './App.css'
-
-// // import Tolbar from './container/Tolbar'
-// // import Slidebar from './container/Slidebar';
-
-// // import Defchatbox from './component/Defchatbox'
-
-// // function App() {
-// //   return (
-// //     <div className='app'>
-// //     <div className='app_body'>
-// //     {/* tolbar
-// //       sidebar
-// //       chatbar  */}
-// // <Tolbar/>
-// // <Slidebar/>
-// // <Defchatbox/>
-// // {/* <Chatbox/> */}
-// //     </div>
-// //     </div>
-// //   )
-// // }
-
-// // export default App
-
-
-
-// import React, { useState } from 'react';
-// import './App.css'
-// import Tolbar from './container/Tolbar'
-// import Slidebar from './container/Slidebar'
-// import Chatbox from './container/Chatbox'
-// import Defchatbox from './component/Defchatbox'
-
-// function App() {
-//   const [selectedChat, setSelectedChat] = useState(null); // State to track the selected chat
-
-//   // This function will be passed down to the Slidebar to handle chat selection
-//   const handleChatSelection = (chatId) => {
-//     setSelectedChat(chatId); // Update the selected chat when a chat is clicked
-//   };
-
-//   return (
-//     <div className='app'>
-//       <div className='app_body'>
-//         <Tolbar />
-//         <Slidebar onChatSelect={handleChatSelection} />
-        
-//         {/* Conditionally render either the default chatbox or the selected chatbox */}
-//         {selectedChat ? (
-//           <Chatbox chatId={selectedChat} />
-//         ) : (
-//           <Defchatbox />
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default App;
 import React, { useState } from 'react';
 import './App.css';
 import Tolbar from './container/Tolbar';
@@ -66,20 +5,28 @@ import Slidebar from './container/Slidebar';
 import Chatbox from './container/Chatbox';
 import Defchatbox from './component/Defchatbox';
 import Status from './container/Status'; 
-
+import Channels from './container/Channels';
 
 function App() {
 
+  const [showChannel,setChannel] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
   const [showStatus, setShowStatus] = useState(false);
   const [selectedChat, setSelectedChat] = useState(null);
 
+  const handlchannelClick = () => {
+    setChannel(true);
+    setShowSidebar(false);
+    setShowStatus(false);
+  };
   const handleStatusClick = () => {
+    setChannel(false);
     setShowSidebar(false);
     setShowStatus(true);
   };
 
   const handleChatClick = () => {
+    setChannel(false);
     setShowSidebar(true);
     setShowStatus(false);
   };
@@ -91,13 +38,17 @@ function App() {
   return (
     <div className='app'>
       <div className='app_body'>
-        {/* <Tolbar />
-        <Status/> */}
-       <Tolbar onStatusClick={handleStatusClick} onChatClick={handleChatClick} />
+        {/* <Tolbar /> */}
+        {/* <Status/> */}
+       {/* <Channels/> */}
+      {/* <Slidebar onChatSelect={handleChatSelection} />  */}
+        
+
+{/* real check */}
+        <Tolbar onStatusClick={handleStatusClick} onChatClick={handleChatClick} onchannelclick={handlchannelClick}/>
         {showSidebar && <Slidebar onChatSelect={handleChatSelection} />}
         {showStatus && <Status />}
-        {/* <Slidebar onChatSelect={handleChatSelection} />  */}
-        
+        {showChannel&& <Channels/>}
         {selectedChat ? (
           <Chatbox selectedChat={selectedChat} /> // Pass selected chat
         ) : (
