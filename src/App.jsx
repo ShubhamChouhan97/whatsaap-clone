@@ -7,19 +7,32 @@ import Defchatbox from './component/Defchatbox';
 import Status from './container/Status'; 
 import Channels from './container/Channels';
 
+import Community from './container/Community';
+
 function App() {
 
   const [showChannel,setChannel] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
   const [showStatus, setShowStatus] = useState(false);
   const [selectedChat, setSelectedChat] = useState(null);
+  const [showCommunity, SetCommunity] = useState(false);
+
+
+const handlecommunityClick =()=>{
+  SetCommunity(true);
+  setChannel(false);
+    setShowSidebar(false);
+    setShowStatus(false);
+}
 
   const handlchannelClick = () => {
     setChannel(true);
+    SetCommunity(false);
     setShowSidebar(false);
     setShowStatus(false);
   };
   const handleStatusClick = () => {
+    SetCommunity(false);
     setChannel(false);
     setShowSidebar(false);
     setShowStatus(true);
@@ -27,6 +40,7 @@ function App() {
 
   const handleChatClick = () => {
     setChannel(false);
+    SetCommunity(false);
     setShowSidebar(true);
     setShowStatus(false);
   };
@@ -38,17 +52,19 @@ function App() {
   return (
     <div className='app'>
       <div className='app_body'>
-        {/* <Tolbar /> */}
+        {/* <Tolbar />
+        <Community/> */}
         {/* <Status/> */}
        {/* <Channels/> */}
       {/* <Slidebar onChatSelect={handleChatSelection} />  */}
         
 
 {/* real check */}
-        <Tolbar onStatusClick={handleStatusClick} onChatClick={handleChatClick} onchannelclick={handlchannelClick}/>
+        <Tolbar onStatusClick={handleStatusClick} onChatClick={handleChatClick} onchannelclick={handlchannelClick} oncommunityclick={handlecommunityClick}/>
         {showSidebar && <Slidebar onChatSelect={handleChatSelection} />}
         {showStatus && <Status />}
         {showChannel&& <Channels/>}
+        {showCommunity && <Community />}
         {selectedChat ? (
           <Chatbox selectedChat={selectedChat} /> // Pass selected chat
         ) : (
