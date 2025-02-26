@@ -8,6 +8,7 @@ import Status from './container/Status';
 import Channels from './container/Channels';
 import Settingcon from './container/Settingcon';
 import Profile from './container/Profile';
+import Login from './container/Login';
 
 import Community from './container/Community';
 
@@ -94,10 +95,11 @@ const handlecommunityClick =()=>{
       <div className='app_body'>
          {/* <Tolbar />
        <Profile/> */}
-    
+    <Login/>
+
 
 {/* real check */}
-        <Tolbar onStatusClick={handleStatusClick} onChatClick={handleChatClick} onchannelclick={handlchannelClick} oncommunityclick={handlecommunityClick} onmetaclick={handlemetaai} onsettingclick={handelsettingClick}  onProfileClick={handelProfile} />
+        {/* <Tolbar onStatusClick={handleStatusClick} onChatClick={handleChatClick} onchannelclick={handlchannelClick} oncommunityclick={handlecommunityClick} onmetaclick={handlemetaai} onsettingclick={handelsettingClick}  onProfileClick={handelProfile} />
         {showSidebar && <Slidebar onChatSelect={handleChatSelection} />}
         {showStatus && <Status />}
         {showChannel&& <Channels/>}
@@ -108,7 +110,7 @@ const handlecommunityClick =()=>{
           <Chatbox selectedChat={selectedChat} /> // Pass selected chat
         ) : (
           <Defchatbox />
-        )}
+        )} */}
       </div>
     </div>
   );
