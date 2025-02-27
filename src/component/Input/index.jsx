@@ -1,9 +1,20 @@
-import React from 'react';
-import styles from './style.module.css';
+import React from "react";
+import styles from "./style.module.css";
 
-function Input({ placeholder, value, onChange }) {
+function Input({ type = "text", name, placeholder, value, onChange, required = false, label }) {
   return (
-    <input type="text" className={styles.input} placeholder={placeholder} value={value} onChange={onChange}  />
+    <div className={styles.inputContainer}>
+      {label && <label className={styles.label}>{label}</label>}
+      <input
+        type={type}
+        name={name}
+        className={styles.input}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        required={required}
+      />
+    </div>
   );
 }
 
