@@ -11,7 +11,12 @@
     min-width: 40px;
     justify-content: center;
 }
-.selectbtnn:hover{
+/* .selectbtnn:hover{
     background-color: #E7FCE3;
     color: #258069;
-}
+} */
+.activeButton {
+    background-color: #25d366; /* Green when active */
+    color: white;
+  }
+  

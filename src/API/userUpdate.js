@@ -1,6 +1,6 @@
 export const userUpdate = async (updateData) => {
     let email = localStorage.getItem("email");
-    console.log("dddddddd",updateData);
+    // console.log("dddddddd",updateData);
 
     if (!email) {
         return { success: false, data: { message: "Email not found!" } };

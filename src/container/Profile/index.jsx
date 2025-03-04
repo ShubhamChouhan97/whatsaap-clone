@@ -8,22 +8,19 @@ import { userUpdate } from "../../API/userUpdate";
 const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({
-    dp: null,
+    dp: "",
     userName: "User",
     about: "No bio available",
   });
 
   const [name, setName] = useState(userData.userName);
   const [about, setAbout] = useState(userData.about);
-  const [profilePic, setProfilePic] = useState(userData.dp);
+  const [profilePic, setProfilePic] = useState("");
 
-  // Fetch user details
   useEffect(() => {
     async function fetchUserDetails() {
       try {
         const details = await userdetail();
-        console.log("User details:", details.data);
-
         if (details.success) {
           setUserData(details.data);
         }
@@ -37,20 +34,17 @@ const Profile = () => {
     fetchUserDetails();
   }, []);
 
-  // Sync local state when userData updates
   useEffect(() => {
     setName(userData.userName || "User");
     setAbout(userData.about || "No bio available");
-    setProfilePic(userData.dp || null);
+    setProfilePic(userData.dp ? `http://localhost:3000${userData.dp}` : "");
   }, [userData]);
 
-  // Update user data in database
   const updateUserData = async (updatedFields) => {
     try {
       const response = await userUpdate(updatedFields);
       if (response.success) {
         setUserData((prev) => ({ ...prev, ...updatedFields }));
-        console.log("User updated successfully", response.data);
       } else {
         console.error("Failed to update user", response.data);
       }
@@ -59,25 +53,38 @@ const Profile = () => {
     }
   };
 
-  // Handle Image Upload
-  const handleImageUpload = (event) => {
+  const handleImageUpload = async (event) => {
     const file = event.target.files[0];
-    if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        alert("File size must be less than 2MB.");
-        return;
-      }
+    if (!file) {
+      alert("Please select a file.");
+      return;
+    }
+    const storedData = localStorage.getItem("email");
+    const email = storedData ? JSON.parse(storedData).email : null;
+// console.log("email is ",email);
+    const formData = new FormData();
+    formData.append("profilePic", file);
+    formData.append("email",email); // Send email with the image
 
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePic(reader.result);
-        updateUserData({ dp: reader.result });
-      };
-      reader.readAsDataURL(file);
+    try {
+      const response = await fetch("http://localhost:3000/upload/uploadProfilePic", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        const imageUrl = `http://localhost:3000${data.imageUrl}`;
+        setProfilePic(imageUrl);
+        updateUserData({ dp: data.imageUrl });
+      } else {
+        alert("Image upload failed!");
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
     }
   };
 
-  // Handle Name Change
   const handleNameChange = () => {
     const newName = prompt("Enter your name", name);
     if (newName && newName.trim() && newName !== name) {
@@ -86,7 +93,6 @@ const Profile = () => {
     }
   };
 
-  // Handle About Change
   const handleAboutChange = () => {
     const newAbout = prompt("Enter about text", about);
     if (newAbout && newAbout.trim() && newAbout !== about) {

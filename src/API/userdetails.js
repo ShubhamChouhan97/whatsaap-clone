@@ -22,6 +22,7 @@ export const userdetail = async () => {
             body: JSON.stringify({ email }), // Sends only { email: "shubhamsc9799@gmail.com" }
             credentials: "include",
         });
+        
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);

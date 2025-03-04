@@ -2,11 +2,13 @@ import React from "react";
 import styles from './style.module.css';
 
 const ChatItem = ({ chat, onSelectChat }) => {
+  const imageUrl = `http://localhost:3000${chat.dp}`;
+  console.log("imageUrl",imageUrl);
   return (
     <div className={styles.chatmain} onClick={() => onSelectChat(chat)}>
      
       <img 
-        src={chat.image || "https://via.placeholder.com/50"} 
+        src={imageUrl} 
         alt={chat.name} 
         className="w-12 h-12 rounded-full mr-4"
       />

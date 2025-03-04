@@ -1,0 +1,150 @@
+const dummyChats = [
+  {
+    id: 1,
+    name: "Alice Johnson",
+    lastMessage: "See you tomorrow!",
+    chattime: "9:05 AM",
+    image: "https://i.pinimg.com/736x/69/a5/60/69a5602fb6377d1fef9bb45e8db9e415.jpg",
+    messages: [
+      { sender: "Alice", text: "Hey, how are you?", time: "9:00 AM" },
+      { sender: "You", text: "I'm good! What about you?", time: "9:05 AM" },
+      { sender: "Alice", text: "See you tomorrow!", time: "9:15 AM" },
+      { sender: "Alice", text: "Hey, how are you?", time: "9:00 AM" },
+      { sender: "You", text: "I'm good! What about you?", time: "9:05 AM" },
+      { sender: "Alice", text: "See you tomorrow!", time: "9:15 AM" },
+      { sender: "Alice", text: "Hey, how are you?", time: "9:00 AM" },
+      { sender: "You", text: "I'm good! What about you?", time: "9:05 AM" },
+      { sender: "Alice", text: "See you tomorrow!", time: "9:15 AM" },
+      { sender: "Alice", text: "Hey, how are you?", time: "9:00 AM" },
+      { sender: "You", text: "I'm good! What about you?", time: "9:05 AM" },
+      { sender: "Alice", text: "See you tomorrow!", time: "9:15 AM" },
+      { sender: "Alice", text: "Hey, how are you?", time: "9:00 AM" },
+      { sender: "You", text: "I'm good! What about you?", time: "9:05 AM" },
+      { sender: "Alice", text: "See you tomorrow!", time: "9:15 AM" },
+      { sender: "Alice", text: "Hey, how are you?", time: "9:00 AM" },
+      { sender: "You", text: "I'm good! What about you?", time: "9:05 AM" },
+      { sender: "Alice", text: "See you tomorrow!", time: "9:15 AM" },
+      { sender: "Alice", text: "Hey, how are you?", time: "9:00 AM" },
+      { sender: "You", text: "I'm good! What about you?", time: "9:05 AM" },
+      { sender: "Alice", text: "See you tomorrow!", time: "9:15 AM" },
+      { sender: "Alice", text: "Hey, how are you?", time: "9:00 AM" },
+      { sender: "You", text: "I'm good! What about you?", time: "9:05 AM" },
+      { sender: "Alice", text: "See you tomorrow!", time: "9:15 AM" },
+      { sender: "Alice", text: "Hey, how are you?", time: "9:00 AM" },
+      { sender: "You", text: "I'm good! What about you?", time: "9:05 AM" },
+      { sender: "Alice", text: "See you tomorrow!", time: "9:15 AM" },
+      { sender: "Alice", text: "Hey, how are you?", time: "9:00 AM" },
+      { sender: "You", text: "I'm good! What about you?", time: "9:05 AM" },
+      { sender: "Alice", text: "See you tomorrow!", time: "9:15 AM" },
+      { sender: "You", text: "I'm good! What about you?", time: "9:05 AM" }
+    ]
+  },
+  {
+    id: 2,
+    name: "Robert Williams",
+    lastMessage: "Can you send the report?",
+    chattime: "2:45 PM",
+    image: "https://lh3.googleusercontent.com/-M8QEca2-C1M/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclEE-cxGBPXiSIGd_-tv4R5KkP83A/photo.jpg",
+    messages: [
+      { sender: "Robert", text: "Hey, did you finish the report?", time: "2:30 PM" },
+      { sender: "You", text: "Almost done, will send soon.", time: "2:35 PM" },
+      { sender: "Robert", text: "Can you send the report?", time: "2:45 PM" }
+    ]
+  },
+  {
+    id: 3,
+    name: "Emily Carter",
+    lastMessage: "Let's meet at 5.",
+    chattime: "3:30 PM",
+    image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJa33QMTNDs1OYbg2XUVKjHxtIX+/toC",
+    messages: [
+      { sender: "Emily", text: "Hey, are you free this evening?", time: "3:00 PM" },
+      { sender: "You", text: "Yeah, what’s up?", time: "3:15 PM" },
+      { sender: "Emily", text: "Let's meet at 5.", time: "3:30 PM" }
+    ]
+  },
+  {
+    id: 4,
+    name: "John Smith",
+    lastMessage: "Game night at my place!",
+    chattime: "7:10 PM",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC-ZuXK4xRqXUBsiawIvVOKtv_IlcVODx1vg&s",
+    messages: [
+      { sender: "John", text: "Yo! Wanna play FIFA?", time: "6:45 PM" },
+      { sender: "You", text: "Hell yeah!", time: "6:50 PM" },
+      { sender: "John", text: "Game night at my place!", time: "7:10 PM" }
+    ]
+  },
+  {
+    id: 5,
+    name: "Sophia Miller",
+    lastMessage: "Meeting postponed to Friday.",
+    chattime: "11:20 AM",
+    image: "https://lh3.googleusercontent.com/-M8QEca2-C1M/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclEE-cxGBPXiSIGd_-tv4R5KkP83A/photo.jpg",
+    messages: [
+      { sender: "Sophia", text: "Hey, any update on the project?", time: "11:00 AM" },
+      { sender: "You", text: "Still working on it, should be done soon.", time: "11:10 AM" },
+      { sender: "Sophia", text: "Meeting postponed to Friday.", time: "11:20 AM" }
+    ]
+  },
+  {
+    id: 6,
+    name: "Michael Brown",
+    lastMessage: "Movie night?",
+    chattime: "8:00 PM",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7PTzPcqAXplVOcjTnV1ktNamn3oJKMSpbkw&s",
+    messages: [
+      { sender: "Michael", text: "Wanna watch a movie?", time: "7:45 PM" },
+      { sender: "You", text: "Which one?", time: "7:50 PM" },
+      { sender: "Michael", text: "Movie night?", time: "8:00 PM" }
+    ]
+  },
+  {
+    id: 7,
+    name: "Olivia Wilson",
+    lastMessage: "Let’s catch up soon!",
+    chattime: "4:30 PM",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi43oV03AlfQeLbkWwHbsDLoybu5_sYcs2xg&s",
+    messages: [
+      { sender: "Olivia", text: "Hey, it's been a while!", time: "4:00 PM" },
+      { sender: "You", text: "Yeah, we should meet up.", time: "4:20 PM" },
+      { sender: "Olivia", text: "Let’s catch up soon!", time: "4:30 PM" }
+    ]
+  },
+  {
+    id: 8,
+    name: "Daniel Martinez",
+    lastMessage: "Thanks for the help!",
+    chattime: "1:15 PM",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi43oV03AlfQeLbkWwHbsDLoybu5_sYcs2xg&s",
+    messages: [
+      { sender: "Daniel", text: "Hey, can you help with my assignment?", time: "12:45 PM" },
+      { sender: "You", text: "Sure, what do you need?", time: "1:00 PM" },
+      { sender: "Daniel", text: "Thanks for the help!", time: "1:15 PM" }
+    ]
+  },
+  {
+    id: 9,
+    name: "Emma Davis",
+    lastMessage: "Miss you!",
+    chattime: "10:05 PM",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi43oV03AlfQeLbkWwHbsDLoybu5_sYcs2xg&s",
+    messages: [
+      { sender: "Emma", text: "Hey, long time no see!", time: "9:30 PM" },
+      { sender: "You", text: "Yeah, how have you been?", time: "9:45 PM" },
+      { sender: "Emma", text: "Miss you!", time: "10:05 PM" }
+    ]
+  },
+  {
+    id: 10,
+    name: "Liam Harris",
+    lastMessage: "Got the tickets!",
+    chattime: "5:50 PM",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi43oV03AlfQeLbkWwHbsDLoybu5_sYcs2xg&s",
+    messages: [
+      { sender: "Liam", text: "I booked the movie tickets!", time: "5:30 PM" },
+      { sender: "You", text: "Awesome! What time?", time: "5:40 PM" },
+      { sender: "Liam", text: "Got the tickets!", time: "5:50 PM" }
+    ]
+  }
+];
