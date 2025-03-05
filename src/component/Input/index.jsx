@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./style.module.css";
 
-function Input({ type = "text", name, placeholder, value, onChange, required = false, label }) {
+function Input({ type = "text", name, placeholder, value, onChange, required = false, label, onKeyDown  }) {
   return (
     <div className={styles.inputContainer}>
       {label && <label className={styles.label}>{label}</label>}
@@ -13,6 +13,7 @@ function Input({ type = "text", name, placeholder, value, onChange, required = f
         value={value}
         onChange={onChange}
         required={required}
+        onKeyDown={onKeyDown}
       />
     </div>
   );
