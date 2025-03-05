@@ -26,6 +26,7 @@ import ChatItem from "../ChatItem";
 import styles from './style.module.css';
 
 const ChatList = ({ chats, onSelectChat }) => {
+  // console.log("chat are",chats)
   return (
     <div className={styles.chatlisttt}>
       <div className={styles.chatlistitemc}>

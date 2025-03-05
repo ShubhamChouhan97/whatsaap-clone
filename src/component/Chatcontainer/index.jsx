@@ -4,6 +4,8 @@ import Input from '../../component/Input';
 import Button from '../Button';
 
 function Chatcontainer({ selectedChat }) {
+  const imageUrl = `http://localhost:3000${selectedChat.dp}`;
+  // console.log(selectedChat)
   if (!selectedChat) {
     return <p>Select a chat to start messaging.</p>;
   }
@@ -12,12 +14,12 @@ function Chatcontainer({ selectedChat }) {
     <div>
       <div className={styles.detailsdiv}>
         <div className={styles.dpimg}>
-          <img src={selectedChat.image} alt={selectedChat.name} />
+          <img src={imageUrl} alt={selectedChat.name} />
         </div>
         
         <div className={styles.reciverdetails}>
           <span className={styles.recivername}>{selectedChat.name}</span><br />
-          <span>Last seen recently</span>
+          <span>Last seen </span>
         </div>
         <div className={styles.funct}>
        <Button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368"><path d="M765-144 526-383q-30 22-65.79 34.5-35.79 12.5-76.18 12.5Q284-336 214-406t-70-170q0-100 70-170t170-70q100 0 170 70t70 170.03q0 40.39-12.5 76.18Q599-464 577-434l239 239-51 51ZM384-408q70 0 119-49t49-119q0-70-49-119t-119-49q-70 0-119 49t-49 119q0 70 49 119t119 49Z"/></svg></Button>         <Button><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368"><path d="M479.79-192Q450-192 429-213.21t-21-51Q408-294 429.21-315t51-21Q510-336 531-314.79t21 51Q552-234 530.79-213t-51 21Zm0-216Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm0-216Q450-624 429-645.21t-21-51Q408-726 429.21-747t51-21Q510-768 531-746.79t21 51Q552-666 530.79-645t-51 21Z"/></svg></Button>
@@ -25,7 +27,7 @@ function Chatcontainer({ selectedChat }) {
       </div>
 
       <div className={styles.chatdetails}>
-        {selectedChat.messages.map((msg, index) => (
+        {selectedChat.chat.map((msg, index) => (
           <div key={index} className={msg.sender === "You" ? styles.sent : styles.received}>
             <p><strong>{msg.sender}:</strong> {msg.text}</p>
             <span>{msg.time}</span>

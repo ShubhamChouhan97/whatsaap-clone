@@ -11,6 +11,6 @@ export const fetchChat = async () => {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    console.log("dsc",data);
+    // console.log("dsc",data);
     return data;
     }
