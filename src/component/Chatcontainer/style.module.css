@@ -94,28 +94,28 @@
     gap: 8px;
     padding: 10px;
     overflow-y: auto; /* Enables scrolling if needed */
-    max-height: 538px; /* Adjust as needed */
+    height: 538px; /* Adjust as needed */
   }
   
   .sent {
-    min-height: 30px;
     margin-right: 25px;
     align-self: flex-end;
     background-color: #D9FDD3; /* Light green for sent messages */
     padding: 8px 12px;
     border-radius: 10px;
     max-width: 60%;
+    height: auto;
     word-wrap: break-word;
     position: relative;
   }
   
   .received {
-    min-height: 30px;
     align-self: flex-start;
     background-color: #ffffff; /* White background for received */
     padding: 8px 12px;
     border-radius: 10px;
     max-width: 60%;
+    height: auto;
     word-wrap: break-word;
     position: relative;
   }
