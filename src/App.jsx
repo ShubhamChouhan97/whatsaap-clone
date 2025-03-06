@@ -565,7 +565,7 @@ function App() {
         {showCommunity && <Community />}
         {showSetting && <Settingcon />}
         {showProfile && <Profile />}
-        {selectedChat ? <Chatbox selectedChat={selectedChat} /> : <Defchatbox />}
+        {selectedChat ? <Chatbox selectedChat={selectedChat}/> : <Defchatbox />}
       </div>
     </div>
   );
