@@ -8,6 +8,10 @@ import Button from '../../component/Button';
 import Input from '../../component/Input';
 import Chatlist from '../../component/Chatlist';
 import { fetchChat } from '../../API/fetchchat';
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:3000"); // Ensure this is defined
+
 
 const Slidebar = ({ onChatSelect }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,21 +22,46 @@ const Slidebar = ({ onChatSelect }) => {
   const email = localStorage.getItem("email");
   // console.log("Email is:", email);
 
-  useEffect(() => {
-    const getChats = async () => {
-      if (email) {
-        try {
-          const fetchedChats = await fetchChat();
-          //console.log("Fetched chats:", fetchedChats);
-          setChats(fetchedChats);
-        } catch (error) {
-          console.error("Error fetching chats:", error);
-        }
-      }
-    };
+  // useEffect(() => {
+  //   const getChats = async () => {
+  //     if (email) {
+  //       try {
+  //         const fetchedChats = await fetchChat();
+  //         //console.log("Fetched chats:", fetchedChats);
+  //         setChats(fetchedChats);
+  //       } catch (error) {
+  //         console.error("Error fetching chats:", error);
+  //       }
+  //     }
+  //   };
 
-    getChats();
-  }, [email]); // Fetch chats when email changes
+  //   getChats();
+  // }, [email]); // Fetch chats when email changes
+
+  const getChats = async () => {
+    if (email) {
+      try {
+        const fetchedChats = await fetchChat();
+        setChats(fetchedChats);
+      } catch (error) {
+        console.error("Error fetching chats:", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getChats(); // Initial fetch when the component mounts
+
+    // Listen for real-time chat updates from the backend
+    socket.on("chat_updated", () => {
+      console.log("Chat updated, fetching new chats...");
+      getChats(); // Fetch new chats when an update occurs
+    });
+
+    return () => {
+      socket.off("chat_updated"); // Clean up event listener on unmount
+    };
+  }, [email]);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);

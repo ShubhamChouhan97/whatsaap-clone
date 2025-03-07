@@ -4,6 +4,8 @@ import Input from "../../component/Input";
 import Button from "../../component/Button";
 import { loginUser } from "../../API/login"; // Import the login API function
 import SignUp from "../SignUp"; // Import SignUp for switching
+import { io } from "socket.io-client";
+const socket = io("http://localhost:3000");
 
 function Login({ onLogin }) {
   const [formData, setFormData] = useState({
@@ -28,11 +30,14 @@ function Login({ onLogin }) {
         console.log(result);
         let a = result.data;
         let detail = a.user;
-        
+        let id = detail._id;
+
         localStorage.setItem("email", JSON.stringify({email: detail.email}));
-        
+        localStorage.setItem("userId",id);
         localStorage.setItem("token", a.token); // Store token
         onLogin(a.token); // Notify App.js about login
+            socket.emit("online", { id });
+         
       } else {
         setError(result.data.message || "Login failed");
       }

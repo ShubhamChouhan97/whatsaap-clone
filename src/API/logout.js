@@ -20,7 +20,7 @@ export const logoutUser = async () => {
         // Clear localStorage and sessionStorage
         localStorage.clear();
         sessionStorage.clear();
-  
+       
         // Redirect to login page
         window.location.href = '/login';
       } else {

@@ -10,7 +10,8 @@ export const Idget = async () => {
     if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
+    
     const data = await response.json();
-    // console.log("dsc",data);
+    //  console.log("dsc",data);
     return data;
     }

@@ -51,6 +51,7 @@
 }
 /* Chat Container */
 .chatdetails {
+  scroll-behavior: smooth;
     /* flex-grow: 1; Takes up all available space */
     width: 100%;
     min-height: 538px; 
@@ -62,6 +63,7 @@
 }
 .inputsection{
     display: flex;
+    align-items: center;
     background-color:#F0F2F5;
     height: 57px;
 }

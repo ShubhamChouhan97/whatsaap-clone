@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './style.module.css';
 import Li from '../../component/Li'; // Ensure the correct folder name
 
-function Tolbar({ onStatusClick, onChatClick ,onchannelclick,oncommunityclick,onmetaclick,onsettingclick ,onProfileClick}) {
+function Tolbar({ onStatusClick, onChatClick ,onchannelclick,oncommunityclick,onmetaclick,onsettingclick ,onProfileClick,}) {
   return (
     <div className={styles.tolbar}>
       <header>

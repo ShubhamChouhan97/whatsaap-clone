@@ -4,7 +4,11 @@ import { logoutUser } from '../../API/logout';
 import { userdetail } from '../../API/userdetails';
 import ClipLoader from "react-spinners/ClipLoader";
 
+import { io } from "socket.io-client";
+const socket = io("http://localhost:3000");
+
 function Settingcon() {
+
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({
     dp: '',
@@ -19,7 +23,7 @@ function Settingcon() {
     async function fetchUserDetails() {
       try {
         const details = await userdetail();
-        console.log("User details:", details.data);
+        //console.log("User details:", details.data);
 
         // Ensure the correct image URL
         const profilePic = details.data.dp
@@ -36,7 +40,12 @@ function Settingcon() {
 
     fetchUserDetails();
   }, []);
+  const MyId = localStorage.getItem("userId");
+ const logout = async () =>{
+  await socket.emit("offline",{MyId});
+  logoutUser();
 
+ }
   return (
     <div className={styles.main}>
       {loading ? (
@@ -71,7 +80,7 @@ function Settingcon() {
               <div className={styles.menu_item}>Notifications</div>
               <div className={styles.menu_item}>Keyboard shortcuts</div>
               <div className={styles.menu_item}>Help</div>
-              <div className={styles.logout} onClick={logoutUser}>
+              <div className={styles.logout} onClick={logout}>
                 Log out
               </div>
             </div>

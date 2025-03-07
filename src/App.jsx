@@ -12,7 +12,10 @@ import Login from "./container/Login";
 import Community from "./container/Community";
 import { Idget } from "./API/idget"; 
 
+
+
 function App() {
+
   const metaurl = "https://www.meta.ai/";
   const [isLoggedIn, setIsLoggedIn] = useState(checkAuth());
   const [showProfile, setProfile] = useState(false);
@@ -37,7 +40,7 @@ const [ reciverId, setreciverId] =useState(null);
   
       fetchData();
     }, []);
-    // console.log(userId);
+
   // Function to check authentication from localStorage and cookies
   function checkAuth() {
     const token = localStorage.getItem("token");
@@ -57,6 +60,7 @@ const [ reciverId, setreciverId] =useState(null);
     // Periodically check authentication to detect cookie changes
     const cookieInterval = setInterval(() => {
       if (!checkAuth()) {
+        
         setIsLoggedIn(false);
       }
     }, 3000); // Check every 3 seconds
@@ -70,6 +74,7 @@ const [ reciverId, setreciverId] =useState(null);
   const handleLogin = (token) => {
     localStorage.setItem("token", token); // Save token
     document.cookie = "auth_token=" + token + "; path=/; Secure"; // Set authentication cookie
+     
     setIsLoggedIn(true);
   };
 
@@ -79,7 +84,7 @@ const [ reciverId, setreciverId] =useState(null);
     // Delete authentication cookie
     document.cookie =
       "auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure";
-
+      
     setIsLoggedIn(false); // Force re-render
   };
 
@@ -146,9 +151,6 @@ const [ reciverId, setreciverId] =useState(null);
   };
 
   const handleChatSelection = (chat) => {
-    // console.log("hhhhhhhhhhh",chat);
-  
-    // console.log("person id ",person)
     setSelectedChat(chat);
    
     let person = chat._id;
@@ -156,9 +158,10 @@ const [ reciverId, setreciverId] =useState(null);
   };
 
   if (!isLoggedIn) {
+     
     return <Login onLogin={handleLogin} />;
   }
-
+  
   return (
     <div className="app">
       <div className="app_body">
@@ -176,9 +179,9 @@ const [ reciverId, setreciverId] =useState(null);
         {showStatus && <Status />}
         {showChannel && <Channels />}
         {showCommunity && <Community />}
-        {showSetting && <Settingcon />}
+        {showSetting && <Settingcon userId={userId} />}
         {showProfile && <Profile />}
-        {selectedChat ? <Chatbox reciverId={reciverId} selectedChat={selectedChat} userId={userId}/> : <Defchatbox />}
+        {selectedChat ? <Chatbox reciverId={reciverId} selectedChat={selectedChat}/> : <Defchatbox />}
       </div>
     </div>
   );

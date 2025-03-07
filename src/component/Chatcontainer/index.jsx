@@ -216,7 +216,7 @@
 
 // last verwsion 
 import { Idget } from "../../API/idget";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { io } from "socket.io-client";
 import styles from "./style.module.css";
 import Input from "../../component/Input";
@@ -228,6 +228,13 @@ function Chatcontainer({ reciverId, selectedChat, details }) {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
   const [iddata, setIdData] = useState(null);
+  const lastMessageRef = useRef(null);
+
+  useEffect(() => {
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chatMessages]); // Scroll when chatMessages update
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -271,9 +278,14 @@ function Chatcontainer({ reciverId, selectedChat, details }) {
 
     socket.emit("join", { userId });
 
-    const handleMessage = ({ senderId, message }) => {
+    const handleMessage = ({ senderId, message,time }) => {
+      const formattedTime = new Date(time).toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+      });
       if (senderId === selectedChat._id) {
-        setChatMessages((prev) => [...prev, { sender: details.userName, text: message }]);
+        setChatMessages((prev) => [...prev, { sender: details.userName, text: message,time: formattedTime }]);
       }
     };
 
@@ -285,12 +297,17 @@ function Chatcontainer({ reciverId, selectedChat, details }) {
   }, [selectedChat, userId]);
 
   const handleSendMessage = () => {
+    const formattedTime = new Date().toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    });
     if (!message.trim() || !userId || !selectedChat?.reciverobjectid) {
       console.error("Missing required data:", { message, userId, selectedChat });
       return;
     }
 
-    const newMessage = { sender: "You", text: message };
+    const newMessage = { sender: "You", text: message,time:formattedTime  };
     setChatMessages((prevMessages) => [...prevMessages, newMessage]);
 
     socket.emit("privateMessage", {
@@ -306,9 +323,14 @@ function Chatcontainer({ reciverId, selectedChat, details }) {
   useEffect(() => {
     if (!reciverId) return;
 
-    const handleIncomingMessage = ({ senderIdbyserver, message }) => {
+    const handleIncomingMessage = ({ senderIdbyserver, message,time }) => {
+      const formattedTime = new Date(time).toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+      });
       if (senderIdbyserver === reciverId) {
-        setChatMessages((prevMessages) => [...prevMessages, { sender: details.userName, text: message }]);
+        setChatMessages((prevMessages) => [...prevMessages, { sender: details.userName, text: message,time: formattedTime}]);
       }
     };
 
@@ -329,7 +351,7 @@ function Chatcontainer({ reciverId, selectedChat, details }) {
             </div>
             <div className={styles.reciverdetails}>
               <span className={styles.recivername}>{details.userName}</span><br />
-              <span>Last seen</span>
+              <span>{details.livestatus}</span>
            
             </div>
             <div className={styles.funct}>
@@ -346,9 +368,9 @@ function Chatcontainer({ reciverId, selectedChat, details }) {
          </div>
           </div>
 
-          <div className={styles.chatdetails}>
+          <div className={styles.chatdetails}  >
             {chatMessages.map((msg, index) => (
-              <div key={index} className={msg.sender === "You" || msg.senderId === userId ? styles.sent : styles.received}>
+              <div key={index} className={msg.sender === "You" || msg.senderId === userId ? styles.sent : styles.received}  ref={index === chatMessages.length - 1 ? lastMessageRef : null}>
                 <p>{msg.text}  <span>{msg.time}</span></p>
                
               </div>
@@ -356,6 +378,9 @@ function Chatcontainer({ reciverId, selectedChat, details }) {
           </div>
 
           <div className={styles.inputsection}>
+          <svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 -960 960 960" width="34px" fill="#5f6368">
+           <path d="M446.67-446.67H200v-66.66h246.67V-760h66.66v246.67H760v66.66H513.33V-200h-66.66v-246.67Z" />
+         </svg>
             <div className={styles.inputdiv}>
               <Input 
                 placeholder="Type a message" 
@@ -366,9 +391,12 @@ function Chatcontainer({ reciverId, selectedChat, details }) {
             </div>
 
             {message ? (
-              <svg onClick={handleSendMessage} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368" style={{ cursor: "pointer" }}>
+             
+                 <svg onClick={handleSendMessage} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368" style={{ cursor: "pointer" }}>
                 <path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z" />
               </svg>
+             
+              
             ) : (
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
                 <path d="M480-400q-50 0-85-35t-35-85v-240q0-50 35-85t85-35q50 0 85 35t35 85v240q0 50-35 85t-85 35Zm0-240Zm-40 520v-123q-104-14-172-93t-68-184h80q0 83 58.5 141.5T480-320q83 0 141.5-58.5T680-520h80q0 105-68 184t-172 93v123h-80Z" />
