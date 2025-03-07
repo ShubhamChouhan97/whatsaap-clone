@@ -349,7 +349,8 @@ function Chatcontainer({ reciverId, selectedChat, details }) {
           <div className={styles.chatdetails}>
             {chatMessages.map((msg, index) => (
               <div key={index} className={msg.sender === "You" || msg.senderId === userId ? styles.sent : styles.received}>
-                <p>{msg.text}</p>
+                <p>{msg.text}  <span>{msg.time}</span></p>
+               
               </div>
             ))}
           </div>

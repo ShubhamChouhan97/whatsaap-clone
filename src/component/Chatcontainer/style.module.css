@@ -98,6 +98,7 @@
   }
   
   .sent {
+    display: flex;
     margin-right: 25px;
     align-self: flex-end;
     background-color: #D9FDD3; /* Light green for sent messages */
@@ -110,6 +111,7 @@
   }
   
   .received {
+    display: flex;
     align-self: flex-start;
     background-color: #ffffff; /* White background for received */
     padding: 8px 12px;
@@ -134,21 +136,25 @@
   
   /* Prevent other elements from overlapping */
   .sent p, .received p {
+    display: flex;
     margin: 0;
+    
   }
   
   .sent span
   {
     display: block;
-    font-size: 12px;
+    font-size: 11px;
     color: #555;
     margin-top: 3px;
+    margin-left: 5px;
   }
   .received span {
     display: block;
     font-size: 12px;
     color: #555;
     margin-top: 3px;
+    margin-left: 5px;
   }
   
   /* Optional: Space out messages */
