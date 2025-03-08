@@ -16,7 +16,9 @@ function ChatContainer({ reciverId, selectedChat, details }) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const lastMessageRef = useRef(null);
   const [images, setImages] = useState([]); // Array to store multiple images
-    const fileInputRef = useRef(null);
+  const [imageUrls, setImageUrls] = useState([]);  // Store uploaded image URLs
+    const [imgforserver,setimgServer] = useState([]);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (lastMessageRef.current) {
@@ -133,26 +135,78 @@ function ChatContainer({ reciverId, selectedChat, details }) {
   }, [reciverId]);
 
   const handleFileSelect = (event) => {
-        const files = Array.from(event.target.files);
-        const fileReaders = [];
-    
-        files.forEach((file) => {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            setImages((prev) => [...prev, e.target.result]);
-          };
-          fileReaders.push(reader);
-          reader.readAsDataURL(file);
-        });
-      };
-    
-      // Open file selection dialog
-      const triggerFileSelect = () => {
-        fileInputRef.current.click();
-      };
-    
-    
+    const files = Array.from(event.target.files);
+        
+        setimgServer(files);
+    if (files.length > 5) {
+      alert("Max file selection limit is 5");
+      return;
+    }
 
+    const fileReaders = [];
+    const imagesArray = [];
+
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imagesArray.push(e.target.result);
+
+        if (imagesArray.length === files.length) {
+          setImages(imagesArray);
+          
+        }
+      };
+
+      fileReaders.push(reader);
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const uploadFiles = async (files) => {
+    try {
+      const formData = new FormData();
+      files.forEach((file) => {
+        formData.append("images", file);
+      });
+
+      const response = await fetch("http://localhost:3000/upload/uploadpic", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to upload files");
+      }
+
+      const data = await response.json();
+      console.log("uri",data);
+      setImageUrls(data.urls); // Store the uploaded image URLs
+    } catch (error) {
+      console.error("Error uploading files:", error);
+    }
+  };
+
+  const triggerFileSelect = () => {
+    fileInputRef.current.click();
+  };
+
+  const shareImages = () => {
+    if (images.length > 0) {
+      uploadFiles(imgforserver);
+      if(imageUrls!= [])
+      {
+        socket.emit("shareImages",{
+          images: imageUrls,
+          reciverId,
+          senderId: userId,
+          receiverobjectId: selectedChat.reciverobjectid,
+        });
+        setImages([])
+      }
+      
+    }
+  };
+ 
   return (
     <div className={styles.chatContainer}>
       {selectedChat ? (
@@ -210,7 +264,7 @@ function ChatContainer({ reciverId, selectedChat, details }) {
                   <img key={idx} src={img} alt="Selected" className={styles.previewImg} />
                 ))}
               </div> 
-              <button onClick={() => setImages([])}>
+              <button onClick={shareImages}>
                 <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
