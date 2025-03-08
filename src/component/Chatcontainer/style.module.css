@@ -1,5 +1,4 @@
 
-
 .detailsdiv {
     cursor: pointer;
     display: flex;
@@ -67,10 +66,7 @@
     background-color:#F0F2F5;
     height: 57px;
 }
-.inputsection svg{
-    cursor: pointer;
-    margin: 10px;
-}
+
 .inputdiv{
     margin: 10px;
     margin-left: 0;
@@ -165,3 +161,57 @@
     margin-bottom: 10px;
   }
   
+
+  .filldiv{
+    margin: 0;
+    margin-left: 10px;
+    margin-top: 4px;
+    height: auto;
+    width: auto;
+  }
+  .filldiv svg{
+    margin: 0;
+  }
+  .filldiv input{
+    display: none;
+  }
+
+  /* emoji */
+  /* Emoji Picker Button */
+.emojiButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  /* margin-left: 8px; */
+  padding: 5px;
+}
+
+.emojiButton:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+/* Emoji Picker Container */
+.emojiPicker {
+  position: absolute;
+  bottom: 320px;
+  left: 600px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  max-height: 200px;
+  max-width: 250px;
+  z-index: 1000;
+}
+
+/* Send Button */
+svg {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+svg:hover {
+  transform: scale(1.1);
+}
+
