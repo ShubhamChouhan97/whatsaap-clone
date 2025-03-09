@@ -68,23 +68,23 @@ function ChatContainer({ reciverId, selectedChat, details }) {
 
     socket.emit("join", { userId });
 
-    const handleMessage = ({ senderId, message, time }) => {
-      const formattedTime = new Date(time).toLocaleString("en-US", {
-        hour: "numeric",
-        minute: "numeric",
-        hour12: true,
-      });
+    // const handleMessage = ({ senderId, message, time }) => {
+    //   const formattedTime = new Date(time).toLocaleString("en-US", {
+    //     hour: "numeric",
+    //     minute: "numeric",
+    //     hour12: true,
+    //   });
 
-      if (senderId === selectedChat._id) {
-        setChatMessages((prev) => [...prev, { sender: details.userName, text: message, time: formattedTime }]);
-      }
-    };
+    //   if (senderId === selectedChat._id) {
+    //     setChatMessages((prev) => [...prev, { sender: details.userName, text: message, time: formattedTime }]);
+    //   }
+    // };
 
-    socket.on("privateMessage", handleMessage);
+    // socket.on("privateMessage", handleMessage);
 
-    return () => {
-      socket.off("privateMessage", handleMessage);
-    };
+    // return () => {
+    //   socket.off("privateMessage", handleMessage);
+    // };
   }, [selectedChat, userId]);
 
   const handleSendMessage = () => {
@@ -190,20 +190,37 @@ function ChatContainer({ reciverId, selectedChat, details }) {
     fileInputRef.current.click();
   };
 
+  // const shareImages = () => {
+  //   if (images.length > 0) {
+  //     uploadFiles(imgforserver);
+  //     if(imageUrls!= [])
+  //     {
+  //       socket.emit("shareImages",{
+  //         images: imageUrls,
+  //         reciverId,
+  //         senderId: userId,
+  //         receiverobjectId: selectedChat.reciverobjectid,
+  //       });
+  //       setImages([])
+  //     }
+      
+  //   }
+  // };
+    
+    
+     
   const shareImages = () => {
     if (images.length > 0) {
       uploadFiles(imgforserver);
-      if(imageUrls!= [])
-      {
-        socket.emit("shareImages",{
+      if (imageUrls.length > 0) {
+        socket.emit("shareImages", {
           images: imageUrls,
           reciverId,
           senderId: userId,
           receiverobjectId: selectedChat.reciverobjectid,
         });
-        setImages([])
+        setImages([]); // Clear the images after sending
       }
-      
     }
   };
  
