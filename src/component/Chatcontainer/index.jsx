@@ -190,6 +190,7 @@ function ChatContainer({ reciverId, selectedChat, details }) {
     fileInputRef.current.click();
   };
 
+  
   // const shareImages = () => {
   //   if (images.length > 0) {
   //     uploadFiles(imgforserver);
