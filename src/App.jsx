@@ -79,8 +79,14 @@ const [ reciverId, setreciverId] =useState(null);
   const handleLogin = (token) => {
     localStorage.setItem("token", token); // Save token
     document.cookie = "auth_token=" + token + "; path=/; Secure"; // Set authentication cookie
-     
     setIsLoggedIn(true);
+    setProfile(false);
+    setSetting(false);
+    setChannel(false);
+    setCommunity(false);
+    setShowSidebar(true);
+    setShowStatus(false);
+    setSelectedChat(null);
   };
 
   const handleLogout = () => {
@@ -180,12 +186,12 @@ const [ reciverId, setreciverId] =useState(null);
           onProfileClick={handleProfile}
           onLogout={handleLogout}
         />
-        {showSidebar && <Slidebar onChatSelect={handleChatSelection} handleLogin={handleLogin} />}
+        {showSidebar && <Slidebar onChatSelect={handleChatSelection} />}
         {showStatus && <Status />}
         {showChannel && <Channels />}
         {showCommunity && <Community />}
         {showSetting && <Settingcon userId={userId} />}
-        {showProfile && <Profile />}
+        {showProfile && <Profile/>}
         {selectedChat ? <Chatbox reciverId={reciverId} selectedChat={selectedChat}/> : <Defchatbox />}
       </div>
     </div>

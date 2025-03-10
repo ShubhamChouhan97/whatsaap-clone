@@ -34,5 +34,6 @@
 .empty{
     font-size: x-large;
     width: 45%;
-    background-color: red;
+    margin-top: 180px;
+    /* background-color: red; */
 }
