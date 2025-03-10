@@ -35,7 +35,9 @@ const ChatList = ({ chats, onSelectChat }) => {
             <ChatItem key={chat.id} chat={chat} onSelectChat={onSelectChat} />
           ))
         ) : (
-          <p>No chats available</p> 
+         <div  className={styles.empty}>
+            <p>No Users Available to Chat,Share more users to connect</p>
+          </div>
         )}
       </div>
     </div>

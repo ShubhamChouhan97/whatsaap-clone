@@ -10,6 +10,7 @@ export const logoutUser = async () => {
       });
   
       if (response.ok) {
+        alert("Logout Succefully");
         // Clear all cookies
         document.cookie.split(";").forEach((cookie) => {
           document.cookie = cookie
@@ -22,7 +23,7 @@ export const logoutUser = async () => {
         sessionStorage.clear();
        
         // Redirect to login page
-        window.location.href = '/login';
+        // window.location.href = '/login';
       } else {
         console.error('Logout failed');
       }

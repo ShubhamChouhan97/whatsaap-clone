@@ -12,7 +12,8 @@ import Login from "./container/Login";
 import Community from "./container/Community";
 import { Idget } from "./API/idget"; 
 
-
+import { io } from "socket.io-client";
+const socket = io("http://localhost:3000");
 
 function App() {
 
@@ -51,6 +52,9 @@ const [ reciverId, setreciverId] =useState(null);
   useEffect(() => {
     const handleStorageChange = () => {
       if (!checkAuth()) {
+        alert("sesion expired");
+        // redirect to login page
+        
         setIsLoggedIn(false);
       }
     };
@@ -60,7 +64,8 @@ const [ reciverId, setreciverId] =useState(null);
     // Periodically check authentication to detect cookie changes
     const cookieInterval = setInterval(() => {
       if (!checkAuth()) {
-        
+        const MyId = localStorage.getItem("userId");
+       socket.emit("offline",{MyId});
         setIsLoggedIn(false);
       }
     }, 3000); // Check every 3 seconds
@@ -175,7 +180,7 @@ const [ reciverId, setreciverId] =useState(null);
           onProfileClick={handleProfile}
           onLogout={handleLogout}
         />
-        {showSidebar && <Slidebar onChatSelect={handleChatSelection} />}
+        {showSidebar && <Slidebar onChatSelect={handleChatSelection} handleLogin={handleLogin} />}
         {showStatus && <Status />}
         {showChannel && <Channels />}
         {showCommunity && <Community />}

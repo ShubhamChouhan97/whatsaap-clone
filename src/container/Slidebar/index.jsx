@@ -9,35 +9,18 @@ import Input from '../../component/Input';
 import Chatlist from '../../component/Chatlist';
 import { fetchChat } from '../../API/fetchchat';
 import { io } from "socket.io-client";
-
 const socket = io("http://localhost:3000"); // Ensure this is defined
-
-
+import { logoutUser } from '../../API/logout';
+import { DeleteAccount } from '../../API/DeleteAccount';
 const Slidebar = ({ onChatSelect }) => {
+  const [isHovered, setIsHovered] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeButton, setActiveButton] = useState('All'); // Initialize with 'All' as active
   const [chats, setChats] = useState([]);
 
   // Get email from local storage
   const email = localStorage.getItem("email");
-  // console.log("Email is:", email);
-
-  // useEffect(() => {
-  //   const getChats = async () => {
-  //     if (email) {
-  //       try {
-  //         const fetchedChats = await fetchChat();
-  //         //console.log("Fetched chats:", fetchedChats);
-  //         setChats(fetchedChats);
-  //       } catch (error) {
-  //         console.error("Error fetching chats:", error);
-  //       }
-  //     }
-  //   };
-
-  //   getChats();
-  // }, [email]); // Fetch chats when email changes
-
+ 
   const getChats = async () => {
     if (email) {
       try {
@@ -75,9 +58,24 @@ const Slidebar = ({ onChatSelect }) => {
     setActiveButton(buttonName);
   };
 
+  const deleteaccountbtn = ()=>{
+    const value = prompt("Are you sure you want to delete your account? If yes, please input your email for confirmation.");
+    let email = localStorage.getItem("email");
+    if (email.startsWith("{") && email.endsWith("}")) {
+      email = JSON.parse(email).email;
+  }
+    if(value === email){
+      DeleteAccount();
+  console.log(value);
+    }
+  }
+  const Logoutbtn = async ()=>{
+// fetch request to logout route
+ logoutUser();
+  }
   return (
     <div className={styles.slidebar}>
-      <div className={styles.head}>
+      {/* <div className={styles.head}>
         <div className={styles.chats}>
           <h2>Chats</h2>
         </div>
@@ -85,7 +83,36 @@ const Slidebar = ({ onChatSelect }) => {
           <img src={addchat} alt="Add Chat" className={styles.icon} />
           <img src={dot} alt="Options" className={styles.icon} />
         </div>
+      </div> */}
+      <div className={styles.head}>
+      <div className={styles.chats}>
+        <h2>Chats</h2>
       </div>
+      <div className={styles.fun}>
+        <img
+          src={addchat}
+          alt="Add Chat"
+          className={styles.icon}
+        />
+        <div
+          className={styles.dotContainer}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <img
+            src={dot}
+            alt="Options"
+            className={styles.icon}
+          />
+          {isHovered && (
+            <div className={styles.dropdown}>
+              <button className={styles.dropdownButton} onClick={deleteaccountbtn}>Delete Account </button>
+              <button className={styles.dropdownButton} onClick={Logoutbtn}>Logout</button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
       
       <div className={styles.center}>
         <div className={styles.inputbox}>

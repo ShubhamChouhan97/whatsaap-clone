@@ -7,6 +7,9 @@
 }
 
 .chatlistitemc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow-y: scroll; /* Enables vertical scrolling */
     max-height: calc(100vh - 60px); /* Adjust based on any header/footer height */
     padding: 5px;
@@ -27,4 +30,9 @@
 .chatlistitemc::-webkit-scrollbar-thumb:hover {
     display: none;
     background: #555;
+}
+.empty{
+    font-size: x-large;
+    width: 45%;
+    background-color: red;
 }

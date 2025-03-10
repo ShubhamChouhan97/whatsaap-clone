@@ -41,6 +41,7 @@ function Settingcon() {
     fetchUserDetails();
   }, []);
   const MyId = localStorage.getItem("userId");
+  
  const logout = async () =>{
   await socket.emit("offline",{MyId});
   logoutUser();
@@ -66,8 +67,8 @@ function Settingcon() {
                 />
               </div>
               <div className={styles.info}>
-                <p className={styles.p2}>{userData.userName}</p>
-                <p className={styles.p3}>{userData.about}</p>
+                <p className={styles.p2}>{userData.userName || "User"}</p>
+                <p className={styles.p3}>{userData.about || "No Bio availabe"}</p>
               </div>
             </div>
           </div>
