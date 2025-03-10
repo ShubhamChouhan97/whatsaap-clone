@@ -138,6 +138,11 @@
     margin: 0;
     
   }
+  .sent img, .received img {
+    width: 200px;
+    height: 200px;
+    
+  }
   
   .sent span
   {
