@@ -16,6 +16,7 @@ export const DeleteAccount = async () => {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include', 
         body: JSON.stringify({ id: MyId }) // Sending the user ID to the server
       });
   

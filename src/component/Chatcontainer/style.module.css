@@ -30,11 +30,15 @@
 }
 
 .funct {
+  /* background-color: red; */
     display: flex;
     align-items: center;
     margin-right: 30px;
 }
-
+.sidede{
+  /* background-color: yellow; */
+  margin-right: 30px;
+}
 .funct button {
     border-radius: 0;
     cursor: pointer;

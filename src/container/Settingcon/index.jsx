@@ -44,6 +44,15 @@ function Settingcon() {
   
  const logout = async () =>{
   await socket.emit("offline",{MyId});
+  document.cookie.split(";").forEach((cookie) => {
+    document.cookie = cookie
+      .replace(/^ +/, "") // Remove spaces
+      .replace(/=.*/, "=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"); // Expire cookies
+  });
+
+  // Clear localStorage and sessionStorage
+  localStorage.clear();
+  sessionStorage.clear();
   logoutUser();
 
  }

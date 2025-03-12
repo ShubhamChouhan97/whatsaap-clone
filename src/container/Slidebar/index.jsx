@@ -26,6 +26,7 @@ const Slidebar = ({ onChatSelect }) => {
       try {
         const fetchedChats = await fetchChat();
         setChats(fetchedChats);
+        
       } catch (error) {
         console.error("Error fetching chats:", error);
       }

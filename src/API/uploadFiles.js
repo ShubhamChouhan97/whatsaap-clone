@@ -12,6 +12,7 @@ export const uploadFiles = async (images) => {
     // Send the images to the server using a POST request
     const response = await fetch("http://localhost:3000/upload/uploadPic", {
       method: "POST",
+      credentials: 'include', 
       body: formData, // FormData automatically sets the correct Content-Type
     });
 
