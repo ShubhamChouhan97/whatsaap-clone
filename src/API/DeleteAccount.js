@@ -1,5 +1,22 @@
 // Client-side: Function to handle account deletion
 export const DeleteAccount = async () => {
+  let email = localStorage.getItem("email");
+    
+    // Handle possible email format in localStorage
+    if (email && email.startsWith("{") && email.endsWith("}")) {
+      try {
+        email = JSON.parse(email).email;
+      } catch (error) {
+        console.error("Error parsing email from localStorage:", error);
+        return { success: false, data: { message: "Invalid email format." } };
+      }
+    }
+  
+    // Ensure email is available
+    if (!email) {
+      return { success: false, data: { message: "No email found in localStorage." } };
+    }
+
     const MyId = localStorage.getItem("userId"); // Getting the user ID from localStorage
     console.log("My ID:", MyId);
   
@@ -17,7 +34,7 @@ export const DeleteAccount = async () => {
           'Content-Type': 'application/json',
         },
         credentials: 'include', 
-        body: JSON.stringify({ id: MyId }) // Sending the user ID to the server
+        body: JSON.stringify({ user:email,id: MyId }) // Sending the user ID to the server
       });
   
       // Handling the response from the server

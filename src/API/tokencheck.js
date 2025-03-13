@@ -1,4 +1,4 @@
-export const fetchChat = async () => {
+export const tokencheck = async () => {
     let email = localStorage.getItem("email");
     
     // Handle possible email format in localStorage
@@ -15,19 +15,24 @@ export const fetchChat = async () => {
     if (!email) {
       return { success: false, data: { message: "No email found in localStorage." } };
     }
-    
-    const response = await fetch('http://localhost:3000/api/chat/allusers', {
-        method: 'POST',
+  
+    try {
+      const response = await fetch("http://localhost:3000/api/auth/authenticate", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        credentials: 'include', // ✅ Allows cookies to be sent and
-        body: JSON.stringify({ user:email})
-        });
-    if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        body: JSON.stringify({ user: email }),
+        credentials: "include", // Allows cookies to be sent and received
+      });
+  
+      const data = await response.json();
+      
+      // Return response status and data
+      return data;
+    } catch (error) {
+      console.error("Error:", error);
+      return { success: false, data: { message: "Something went wrong!" } };
     }
-    const data = await response.json();
-    // console.log("dsc",data);
-    return data;
-    }
+  };
+  

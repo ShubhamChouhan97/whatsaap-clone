@@ -1,5 +1,23 @@
 // src/api/logout.js
 export const logoutUser = async () => {
+  let email = localStorage.getItem("email");
+    
+  // Handle possible email format in localStorage
+  if (email && email.startsWith("{") && email.endsWith("}")) {
+    try {
+      email = JSON.parse(email).email;
+    } catch (error) {
+      console.error("Error parsing email from localStorage:", error);
+      return { success: false, data: { message: "Invalid email format." } };
+    }
+  }
+
+  // Ensure email is available
+  if (!email) {
+    return { success: false, data: { message: "No email found in localStorage." } };
+  }
+  
+  
     try {
       const response = await fetch('http://localhost:3000/api/auth/logout', {
         method: 'POST',
@@ -7,6 +25,7 @@ export const logoutUser = async () => {
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ user:email}),
       });
   
       if (response.ok) {

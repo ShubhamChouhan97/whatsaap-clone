@@ -19,7 +19,7 @@ export const userdetail = async () => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email }), // Sends only { email: "shubhamsc9799@gmail.com" }
+            body: JSON.stringify({ user:email,email }), // Sends only { email: "shubhamsc9799@gmail.com" }
             credentials: "include",
         });
         

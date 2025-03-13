@@ -17,7 +17,7 @@ export const userUpdate = async (updateData) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email, ...updateData }), // Send email with updates
+            body: JSON.stringify({ user:email,email, ...updateData }), // Send email with updates
             credentials: "include",
         });
 

@@ -1,6 +1,24 @@
 // uploadFiles.js
 
 export const uploadFiles = async (images) => {
+
+  let email = localStorage.getItem("email");
+    
+  // Handle possible email format in localStorage
+  if (email && email.startsWith("{") && email.endsWith("}")) {
+    try {
+      email = JSON.parse(email).email;
+    } catch (error) {
+      console.error("Error parsing email from localStorage:", error);
+      return { success: false, data: { message: "Invalid email format." } };
+    }
+  }
+
+  // Ensure email is available
+  if (!email) {
+    return { success: false, data: { message: "No email found in localStorage." } };
+  }
+console.log("email at uploadfile",email);
   const formData = new FormData();
 
   // Append all images to the FormData object
@@ -12,8 +30,9 @@ export const uploadFiles = async (images) => {
     // Send the images to the server using a POST request
     const response = await fetch("http://localhost:3000/upload/uploadPic", {
       method: "POST",
-      credentials: 'include', 
-      body: formData, // FormData automatically sets the correct Content-Type
+      credentials: 'include',
+      body: JSON.stringify({ user:email,formData}), 
+      // body: formData, // FormData automatically sets the correct Content-Type
     });
 
     if (!response.ok) {
