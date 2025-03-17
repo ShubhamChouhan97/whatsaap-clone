@@ -341,7 +341,7 @@ function ChatContainer({ reciverId, selectedChat}) {
   const [imgforserver, setImgServer] = useState([]);
   const fileInputRef = useRef(null);
 const [details, setDetails] = useState([]);
-const [status, setStatus] = useState("Online");
+const [status, setStatus] = useState(" ");
 const [lastActivity, setLastActivity] = useState(Date.now());
   const userId = localStorage.getItem("userId");
 

@@ -7,9 +7,6 @@
 }
 
 .chatlistitemc {
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     overflow-y: scroll; /* Enables vertical scrolling */
     max-height: calc(100vh - 60px); /* Adjust based on any header/footer height */
     padding: 5px;
