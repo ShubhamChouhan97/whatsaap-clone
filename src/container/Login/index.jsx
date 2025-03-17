@@ -6,7 +6,7 @@ import { loginUser } from "../../API/login"; // Import the login API function
 import SignUp from "../SignUp"; // Import SignUp for switching
 import { io } from "socket.io-client";
 const socket = io("http://localhost:3000");
-
+import ForgotPass from "../ForgotPass";
 function Login({ onLogin }) {
   const [formData, setFormData] = useState({
     email: "",
@@ -15,6 +15,7 @@ function Login({ onLogin }) {
 
   const [error, setError] = useState("");
   const [showSignup, setShowSignup] = useState(false);
+  const [forgotPass,setForpass] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -49,6 +50,10 @@ function Login({ onLogin }) {
   if (showSignup) {
     return <SignUp />;
   }
+  if(forgotPass)
+  {
+    return <ForgotPass/>;
+  }
 
   return (
     <div className={styles.main}>
@@ -78,10 +83,14 @@ function Login({ onLogin }) {
               required
             />
           </div>
+          <span className={styles.signupText}
+          onClick={() => setForpass(true)}
+          >Forgat Password</span>
           <div className={styles.btn}>
             <Button type="submit">Login</Button>
           </div>
         </form>
+        
         <div className={styles.botm}>
           <p>
             Don't have an account?{" "}
@@ -91,6 +100,7 @@ function Login({ onLogin }) {
             >
               Sign Up
             </span>
+            
           </p>
         </div>
       </div>

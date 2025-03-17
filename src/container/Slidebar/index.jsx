@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './style.module.css';
+
 import addchat from '../../assets/message.png';
 import dot from '../../assets/dots.png';
 import searchimg from '../../assets/search.png';
@@ -12,6 +13,9 @@ import { io } from "socket.io-client";
 const socket = io("http://localhost:3000"); // Ensure this is defined
 import { logoutUser } from '../../API/logout';
 import { DeleteAccount } from '../../API/DeleteAccount';
+
+
+
 const Slidebar = ({ onChatSelect }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');

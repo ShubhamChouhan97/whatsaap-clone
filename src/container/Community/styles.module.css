@@ -6,6 +6,7 @@
     overflow: hidden;
 }
 .addcomm{
+    cursor: pointer;
     display: flex;
     align-items: center;
 }
@@ -20,11 +21,14 @@
     background-color: #00A884;
 }
 .p1{
+    padding-left: 10px;
+    padding-top: 5px;
     font-size: 30px;
     margin: 10px;
     font-weight: 550;
 }
 .p2{
+    cursor: pointer;
     font-size: 19px;
     
 }
@@ -46,3 +50,19 @@ background-color: #FFFFFF;
     width: 70%;
     height: 70%;
 }
+.contacts {
+    border-radius: 5px;
+    position: fixed;
+    right: 220px;
+    top: 150px;
+    height: 400px;
+    width: 450px;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+  }
+  .contacts h1{
+    padding: 5px;
+    margin-left: 20px;
+  }

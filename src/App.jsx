@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Tolbar from "./container/Tolbar";
@@ -181,8 +182,10 @@ const [ reciverId, setreciverId] =useState(null);
   }
   
   return (
+    
     <div className="app">
       <div className="app_body">
+     
         <Tolbar
           onStatusClick={handleStatusClick}
           onChatClick={handleChatClick}

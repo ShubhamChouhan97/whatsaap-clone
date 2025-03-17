@@ -1,15 +1,15 @@
 .chatlisttt {
     width: 100%;
     height: 100%; /* Full viewport height */
-    display: flex;
+    display: fl;
     flex-direction: column;
     overflow: hidden; /* Prevents extra scrolling on the main container */
 }
 
 .chatlistitemc {
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     overflow-y: scroll; /* Enables vertical scrolling */
     max-height: calc(100vh - 60px); /* Adjust based on any header/footer height */
     padding: 5px;

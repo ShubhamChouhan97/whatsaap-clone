@@ -30,6 +30,7 @@ li {
 
 /* Show tooltip only when hovering over the button */
 .listItem:hover .tooltip {
+  z-index: 2000;
   visibility: visible;
   opacity: 1;
   transform: translateX(-50%) translateY(0);

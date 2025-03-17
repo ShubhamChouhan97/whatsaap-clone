@@ -323,7 +323,6 @@
 // export default ChatContainer;
 // version 2
 
-
 import React, { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 import EmojiPicker from "emoji-picker-react";
@@ -366,11 +365,11 @@ useEffect(() => {
 
   if (!selectedChat || !userId || !reciverId) return;
 
-  socket.on("chat_updated", () => {
-    fetchChat(); // Fetch new chats when an update occurs
-  });
+  // socket.on("chat_updated", () => {
+  //   fetchChat(); // Fetch new chats when an update occurs
+  // });
 
-  fetchChat();
+   fetchChat();
 
   // Set interval to check user status every 10 seconds
   const id = setInterval(() => {
@@ -393,10 +392,6 @@ useEffect(() => {
     clearInterval(id); // Cleanup the interval on component unmount
   };
 }, [reciverId, selectedChat, userId, lastActivity, details.livestatus, details.lastseen]);
-
-
-
-  
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -463,10 +458,12 @@ useEffect(() => {
 // setLastActivity(Date.now()); // Update last activity time when a message is sent
 setStatus("Online")
   };
+
   useEffect(() => {
     if (!reciverId) return;
   
     const handleIncomingMessage = ({ senderIdbyserver, message, time, imageUrl }) => {
+      setStatus("Online"); // Show Online when there's activity
       const formattedTime = new Date(time).toLocaleString("en-US", {
         hour: "2-digit",
         minute: "2-digit",
@@ -485,7 +482,6 @@ setStatus("Online")
           },
         ]);
 //setLastActivity(Date.now());
-setStatus("Online"); // Show Online when there's activity
       }
     };
   
@@ -685,3 +681,5 @@ setStatus("Online"); // Show Online when there's activity
 }
 
 export default ChatContainer;
+
+// 17 marcha
