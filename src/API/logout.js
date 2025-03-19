@@ -29,7 +29,7 @@ export const logoutUser = async () => {
       });
   
       if (response.ok) {
-        alert("Logout Succefully");
+        //alert("Logout Succefully");
         // Clear all cookies
         document.cookie.split(";").forEach((cookie) => {
           document.cookie = cookie

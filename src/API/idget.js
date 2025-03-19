@@ -16,7 +16,7 @@ export const Idget = async () => {
       return { success: false, data: { message: "No email found in localStorage." } };
     }
     const response = await fetch('http://localhost:3000/api/auth/idget', {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },

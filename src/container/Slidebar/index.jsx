@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './style.module.css';
-
+import { useNavigate } from "react-router-dom";
 import addchat from '../../assets/message.png';
 import dot from '../../assets/dots.png';
 import searchimg from '../../assets/search.png';
@@ -13,10 +13,11 @@ import { io } from "socket.io-client";
 const socket = io("http://localhost:3000"); // Ensure this is defined
 import { logoutUser } from '../../API/logout';
 import { DeleteAccount } from '../../API/DeleteAccount';
-
+import { ToastContainer, toast } from "react-toastify"; 
 
 
 const Slidebar = ({ onChatSelect }) => {
+  const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeButton, setActiveButton] = useState('All'); // Initialize with 'All' as active
@@ -42,7 +43,7 @@ const Slidebar = ({ onChatSelect }) => {
 
     // Listen for real-time chat updates from the backend
     socket.on("chat_updated", () => {
-      console.log("Chat updated, fetching new chats...");
+    //  console.log("Chat updated, fetching new chats...");
       getChats(); // Fetch new chats when an update occurs
     });
 
@@ -63,23 +64,43 @@ const Slidebar = ({ onChatSelect }) => {
     setActiveButton(buttonName);
   };
 
-  const deleteaccountbtn = ()=>{
+  const deleteaccountbtn = async ()=>{
     const value = prompt("Are you sure you want to delete your account? If yes, please input your email for confirmation.");
     let email = localStorage.getItem("email");
     if (email.startsWith("{") && email.endsWith("}")) {
       email = JSON.parse(email).email;
   }
-    if(value === email){
-      DeleteAccount();
-  console.log(value);
+  
+  if (value === email) {
+    await DeleteAccount();
+    toast.success("Account deleted successfully!", { position: "top-center" });
+    setTimeout(() => {
+      navigate("/"); // Navigate after 3 seconds
+    }, 3000);
+  } else {
+    toast.error("Email does not match! Account deletion failed.", {
+      position: "top-center",
+    })}
+
+  }
+  const Logoutbtn = async () => {
+    try {
+      await logoutUser(); // Ensure this function handles errors properly
+      toast.success("Logged out successfully!", { position: "top-center" });
+      setTimeout(() => {
+        navigate("/"); // Navigate after 3 seconds
+      }, 3000);
+      // Optionally, clear local storage and redirect
+      localStorage.removeItem("email");
+      localStorage.clear();
+    } catch (error) {
+      toast.error("Logout failed. Try again!", { position: "top-center" });
     }
-  }
-  const Logoutbtn = async ()=>{
-// fetch request to logout route
- logoutUser();
-  }
+  };
+
   return (
     <div className={styles.slidebar}>
+    <ToastContainer/>
       {/* <div className={styles.head}>
         <div className={styles.chats}>
           <h2>Chats</h2>
@@ -145,7 +166,7 @@ const Slidebar = ({ onChatSelect }) => {
       
       <div className={styles.slidebardown}>
         <img className={styles.wlogo} src={wlogo} alt="WhatsApp Logo" />
-        <h2>Get WhatsApp for Windows</h2>
+        <h2>YapYup a Chat App</h2>
       </div>
     </div>
   );

@@ -463,6 +463,7 @@ setStatus("Online")
     if (!reciverId) return;
   
     const handleIncomingMessage = ({ senderIdbyserver, message, time, imageUrl }) => {
+     
       setStatus("Online"); // Show Online when there's activity
       const formattedTime = new Date(time).toLocaleString("en-US", {
         hour: "2-digit",
@@ -483,6 +484,7 @@ setStatus("Online")
         ]);
 //setLastActivity(Date.now());
       }
+      fetchChat();
     };
   
     // Make sure to listen to the socket message correctly

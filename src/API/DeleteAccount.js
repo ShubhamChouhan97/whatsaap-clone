@@ -18,7 +18,7 @@ export const DeleteAccount = async () => {
     }
 
     const MyId = localStorage.getItem("userId"); // Getting the user ID from localStorage
-    console.log("My ID:", MyId);
+    // console.log("My ID:", MyId);
   
     // If there is no user ID in localStorage, show an error and return
     if (!MyId) {
@@ -40,7 +40,7 @@ export const DeleteAccount = async () => {
       // Handling the response from the server
       const data = await response.json();
       if (response.ok) {
-        alert("Account deleted successfully");
+       // alert("Account deleted successfully");
         localStorage.clear();
         sessionStorage.clear();
       } else {

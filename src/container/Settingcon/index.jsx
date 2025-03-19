@@ -3,12 +3,13 @@ import styles from './styles.module.css';
 import { logoutUser } from '../../API/logout';
 import { userdetail } from '../../API/userdetails';
 import ClipLoader from "react-spinners/ClipLoader";
-
+import Login
+ from '../Login';
 import { io } from "socket.io-client";
 const socket = io("http://localhost:3000");
 
 function Settingcon() {
-
+const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({
     dp: '',
@@ -54,8 +55,14 @@ function Settingcon() {
   localStorage.clear();
   sessionStorage.clear();
   logoutUser();
+  setIsLoggedIn(false);
 
  }
+
+ if (!isLoggedIn) {
+  return <Login />;
+}
+
   return (
     <div className={styles.main}>
       {loading ? (
