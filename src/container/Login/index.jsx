@@ -10,7 +10,7 @@ import ForgotPass from "../ForgotPass";
 import { io } from "socket.io-client";
 import { ToastContainer, toast } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css"; // Ensure Toastify styles are included
-
+import { Mail, Lock  } from "lucide-react";
 const socket = io("http://localhost:3000");
 
 function Login({ onLogin }) {
@@ -73,6 +73,7 @@ function Login({ onLogin }) {
         {error && <p className={styles.error}>{error}</p>}
         <form onSubmit={handleSubmit} className={styles.iinp}>
           <div className={styles.inputbox}>
+          <Mail className="text-gray-500" />
             <Input
               type="email"
               name="email"
@@ -83,6 +84,7 @@ function Login({ onLogin }) {
             />
           </div>
           <div className={styles.inputbox}>
+          <Lock className="text-gray-500" />
             <Input
               type="password"
               name="password"

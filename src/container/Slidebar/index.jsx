@@ -87,14 +87,10 @@ const Slidebar = ({ onChatSelect }) => {
     try {
       await logoutUser(); // Ensure this function handles errors properly
       toast.success("Logged out successfully!", { position: "top-center" });
-      localStorage.removeItem("email");
       localStorage.clear();
       setTimeout(() => {
         navigate("/login"); // Navigate after 3 seconds
       }, 3000);
-      // Optionally, clear local storage and redirect
-      localStorage.removeItem("email");
-      localStorage.clear();
     } catch (error) {
       toast.error("Logout failed. Try again!", { position: "top-center" });
     }
@@ -103,15 +99,6 @@ const Slidebar = ({ onChatSelect }) => {
   return (
     <div className={styles.slidebar}>
     <ToastContainer/>
-      {/* <div className={styles.head}>
-        <div className={styles.chats}>
-          <h2>Chats</h2>
-        </div>
-        <div className={styles.fun}>
-          <img src={addchat} alt="Add Chat" className={styles.icon} />
-          <img src={dot} alt="Options" className={styles.icon} />
-        </div>
-      </div> */}
       <div className={styles.head}>
       <div className={styles.chats}>
         <h2>Chats</h2>

@@ -110,6 +110,7 @@ import Login from '../Login';
 import { forgotpass } from '../../API/forgotpass';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Mail } from "lucide-react";
 
 function ForgotPass() {
   const [formData, setFormData] = useState({
@@ -176,6 +177,7 @@ function ForgotPass() {
         <h1>Forgot Password</h1>
         <form onSubmit={handleSubmit} className={styles.iinp}>
           <div className={styles.inputbox}>
+           <Mail className='text-gray-500'/>
             <Input
               type="email"
               name="email"

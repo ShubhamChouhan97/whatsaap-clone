@@ -29,20 +29,7 @@ export const logoutUser = async () => {
       });
   
       if (response.ok) {
-        //alert("Logout Succefully");
-        // Clear all cookies
-        // document.cookie.split(";").forEach((cookie) => {
-        //   document.cookie = cookie
-        //     .replace(/^ +/, "") // Remove spaces
-        //     .replace(/=.*/, "=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"); // Expire cookies
-        // });
-  
-        // Clear localStorage and sessionStorage
         localStorage.clear();
-        sessionStorage.clear();
-       
-        // Redirect to login page
-        // window.location.href = '/login';
       } else {
         console.error('Logout failed');
       }
