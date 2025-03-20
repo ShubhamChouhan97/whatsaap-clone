@@ -455,7 +455,7 @@ useEffect(() => {
     setMessage("");
     setImages([]);
     setImgServer([]);
-// setLastActivity(Date.now()); // Update last activity time when a message is sent
+    // setLastActivity(Date.now()); // Update last activity time when a message is sent
 setStatus("Online")
   };
 
@@ -482,7 +482,7 @@ setStatus("Online")
             imageUrl: imageUrl || null,
           },
         ]);
-//setLastActivity(Date.now());
+      setLastActivity(Date.now());
       }
       fetchChat();
     };
