@@ -157,7 +157,7 @@ function Main() {
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
-      <Main />
+      <App />
     </Router>
   </StrictMode>
 );

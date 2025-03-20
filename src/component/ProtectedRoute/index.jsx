@@ -8,9 +8,8 @@ const ProtectedRoute = () => {
   useEffect(() => {
     const verifyUser = async () => {
       try {
-        const response = await axios.post(
-          "http://localhost:3000/api/auth/checktoken",
-          {}, // Empty object for POST body
+        const response = await axios.get(
+          "http://localhost:3000/api/auth/checktoken", // Empty object for POST body
           { withCredentials: true } // Send cookies and authentication credentials
         );
         

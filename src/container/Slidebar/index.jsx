@@ -87,8 +87,10 @@ const Slidebar = ({ onChatSelect }) => {
     try {
       await logoutUser(); // Ensure this function handles errors properly
       toast.success("Logged out successfully!", { position: "top-center" });
+      localStorage.removeItem("email");
+      localStorage.clear();
       setTimeout(() => {
-        navigate("/"); // Navigate after 3 seconds
+        navigate("/login"); // Navigate after 3 seconds
       }, 3000);
       // Optionally, clear local storage and redirect
       localStorage.removeItem("email");
